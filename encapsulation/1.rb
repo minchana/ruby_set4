@@ -53,15 +53,28 @@ class User < Message
 	end
 
 	def sendSecureMessage
-		secureChat("This is confidential")
+		a = User.new
+		a.secureChat("This is confidential")
 	end
 
 	def sendPersonalMessage
-		personalChat("Hi, how are you?")
+		a = User.new
+		a.personalChat("Hi, how are you?")
+
+		# if the object is not created then also the method call works...... Here the object creation is to differentiate between private and protected access specifier..........
 	end
 end
 
-
-
 client = User.new
+client.groupChat("Hi Friends")
+
+client.sendPersonalMessage
+
+# client.sendSecureMessage
+
+begin
+	client.sendSecureMessage
+rescue
+	puts "client should not be able to call the secureChat "
+end
 
